@@ -1,4 +1,5 @@
-.gitignore
+.gitconfig
+
 ```
 [alias]
 	p = push
