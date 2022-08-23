@@ -18,3 +18,10 @@
 	email = andrei.vacaru@runtimeverification.com
 	name = Andrei
 ```
+
+[selector](./scripts/selector): computes the selector of a Solidity function using [getSelector.py](./scripts/python/bin/getSelector.py)
+
+requirements
+```
+pip3 install pycryptodome
+```
