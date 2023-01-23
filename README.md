@@ -21,6 +21,7 @@
 
 [selector](./scripts/selector): computes the selector of a Solidity function using [getSelector.py](./scripts/python/bin/getSelector.py)
 
+[readBytes](./scripts/runBytes): takes a string of bytes and displays them in Int and Hexadecimal format using [readBytes.py](./scripts/python/bin/readBytes.py).
 requirements
 ```
 pip3 install pycryptodome
