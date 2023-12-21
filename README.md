@@ -26,3 +26,4 @@ pip3 install pycryptodome
 ```
 
 - [readBytes](./scripts/readBytes): takes a string of bytes and displays them in Int and Hexadecimal format using [readBytes.py](./scripts/python/bin/readBytes.py).
+- [build-kontrol](./build-kontrol): locally building kontrol according to the [readme](https://github.com/runtimeverification/kontrol#build-from-source) instructions.
