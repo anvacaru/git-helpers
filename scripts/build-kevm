@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+goto_repo_root() {
+    local root
+    root=$(git rev-parse --show-toplevel)
+    if [ $? -eq 0 ]; then
+        echo "Building KEVM at $root"
+        cd "$root" || return
+    else
+        echo "You're not inside a Git repository."
+    fi
+}
+
+goto_repo_root
+
+kup install k.openssl.procps --version v$(cat deps/k_release)
+
+make poetry
+
+poetry -C kevm-pyk run kdist clean
+
+CXX=clang++-14 poetry -C kevm-pyk run kdist --verbose build evm-semantics.plugin
+
+poetry -C kevm-pyk run kdist --verbose build -j4
