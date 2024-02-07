@@ -15,6 +15,8 @@ goto_repo_root() {
 
 goto_repo_root
 
+git submodule update --init --recursive --depth 1 kevm-pyk/src/kevm_pyk/kproj/plugin
+
 kup install k.openssl.procps --version v$(cat deps/k_release)
 
 make poetry
