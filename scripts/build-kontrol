@@ -24,15 +24,16 @@ done
 
 goto_repo_root
 
-kup install k.openssl.procps --version v$(cat deps/k_release)
+kup install k.openssl.procps.secp256k1 --version v$(cat deps/k_release)
 
 poetry install
 
 poetry run kdist clean
 
-CXX=clang++-14 poetry run --no-cache kdist --verbose build -j2 evm-semantics.haskell kontrol.foundry
+CXX=clang++-14 poetry run --no-cache kdist --verbose build -j8 evm-semantics.haskell kontrol.foundry
 
 # Update expected output if flag is passed
 if [ "$UPDATE_OUTPUT" = true ]; then
-    make cov-integration TEST_ARGS="--numprocesses=11 --update-expected-output"
+    make cov-integration TEST_ARGS='--numprocesses=8 --update-expected-output -vv -k "not test_kontrol_cse" | tee running-tests.log'
+    make cov-integration TEST_ARGS='--numprocesses=8 --update-expected-output -vv -k "test_kontrol_cse" | tee running-cse-tests.log'
 fi
