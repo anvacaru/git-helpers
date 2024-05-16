@@ -34,6 +34,6 @@ CXX=clang++-14 poetry run --no-cache kdist --verbose build -j8 evm-semantics.has
 
 # Update expected output if flag is passed
 if [ "$UPDATE_OUTPUT" = true ]; then
-    make cov-integration TEST_ARGS='--numprocesses=8 --update-expected-output -vv -k "not test_kontrol_cse and not test_foundry_minimize_proof" | tee running-tests.log'
-    make cov-integration TEST_ARGS='--numprocesses=8 --update-expected-output -vv -k "test_kontrol_cse or test_foundry_minimize_proof" | tee running-cse-tests.log'
+    make cov-integration TEST_ARGS='--numprocesses=8 --update-expected-output -vv -k "not (test_kontrol_cse or test_foundry_minimize_proof or test_kontrol_end_to_end)"' | tee running-tests.log
+    make cov-integration TEST_ARGS='--numprocesses=8 --update-expected-output -vv -k "test_kontrol_cse or test_foundry_minimize_proof"' | tee running-cse-tests.log
 fi
