@@ -13,11 +13,20 @@ goto_repo_root() {
     fi
 }
 
+LLVM_DEBUG=""
+for arg in "$@"
+do
+    if [ "$arg" == "--with-llvm-debug" ]; then
+        LLVM_DEBUG="--arg enable-llvm-debug=true"
+        break
+    fi
+done
+
 goto_repo_root
 
 git submodule update --init --recursive --depth 1 kevm-pyk/src/kevm_pyk/kproj/plugin
 
-kup install k.openssl.procps --version v$(cat deps/k_release)
+kup install k.openssl.procps.secp256k1 --version v$(cat deps/k_release)
 
 make poetry
 
@@ -25,4 +34,4 @@ poetry -C kevm-pyk run kdist clean
 
 CXX=clang++-14 poetry -C kevm-pyk run kdist --verbose build evm-semantics.plugin -j`nproc`
 
-poetry -C kevm-pyk run kdist --verbose build -j4
+poetry -C kevm-pyk run kdist --verbose build -j4 $LLVM_DEBUG
