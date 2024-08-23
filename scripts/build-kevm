@@ -15,7 +15,7 @@ goto_repo_root() {
 
 install_k() {
     echo "Installing or updating K to version $REQUIRED_VERSION..."
-    kup install k.openssl.procps.secp256k1 --version "$REQUIRED_VERSION"
+    kup install k.openssl.secp256k1 --version "$REQUIRED_VERSION"
 }
 
 LLVM_DEBUG=""

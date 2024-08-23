@@ -15,7 +15,7 @@ goto_repo_root() {
 
 install_k() {
     echo "Installing or updating K to version $REQUIRED_VERSION..."
-    kup install k.openssl.procps.secp256k1 --version "$REQUIRED_VERSION"
+    kup install k.openssl.secp256k1 --version "$REQUIRED_VERSION"
 }
 
 UPDATE_OUTPUT=false
@@ -56,6 +56,6 @@ CXX=clang++-14 poetry run --no-cache kdist --verbose build -j8 evm-semantics.has
 
 # Update expected output if flag is passed
 if [ "$UPDATE_OUTPUT" = true ]; then
-    make cov-integration TEST_ARGS='--numprocesses=4 --update-expected-output -vv -k "not (test_kontrol_cse or test_foundry_minimize_proof or test_kontrol_end_to_end)"' | tee running-tests.log
-    make cov-integration TEST_ARGS='--numprocesses=4 --update-expected-output -vv -k "test_kontrol_cse or test_foundry_minimize_proof"' | tee running-cse-tests.log
+    make cov-integration TEST_ARGS='--numprocesses=6 --maxfail=100 --update-expected-output -vv -k "not (test_kontrol_cse or test_foundry_minimize_proof or test_kontrol_end_to_end)"' | tee running-tests.log
+    make cov-integration TEST_ARGS='--numprocesses=4 --maxfail=100 --update-expected-output -vv -k "test_kontrol_cse or test_foundry_minimize_proof"' | tee running-cse-tests.log
 fi
