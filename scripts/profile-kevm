@@ -32,9 +32,7 @@ if [ ! -e "$TEMPD" ]; then
 fi
 
 clean_up () {
-    if [ -z "$KEEP_TEMPD" ]; then
-        rm -rf "$TEMPD"
-    fi
+    rm -rf "$TEMPD"
     killall kore-rpc-booster || echo "no zombie processes found"
 }
 
